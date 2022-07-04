@@ -28,6 +28,11 @@ return averageScore
 
 // Exercise 4:  Alphabetic order by title 
 function orderAlphabetically(array) {
+ const moviesTitles = array.map(({title}) => title)
+ const arrayOrdered = moviesTitles.sort((a , b) => a.localeCompare(b))
+ const firstTwenty = arrayOrdered.slice(0, 20)
+
+ return firstTwenty
   
 }
 
