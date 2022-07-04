@@ -1,62 +1,68 @@
-const movies = require("./data");
+const movies = require('./data');
 
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(movies) {
   // destructuring
-  const directors = movies.map(({director}) => director)
-  console.log("EXERCICE 1 ->", directors);
+  const directors = movies.map(({ director }) => director);
+  console.log('EXERCICE 1 ->', directors);
   return directors;
 }
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
- const directors = array.filter( names => names.director === director)
- console.log("EXERCICE 2 ->",directors)
- return directors
+  const directors = array.filter((names) => names.director === director);
+  console.log('EXERCICE 2 ->', directors);
+  return directors;
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
-
-const moviesFromDirector = getMoviesFromDirector(array, director)
-console.log(moviesFromDirector)
-const moviesScore = moviesFromDirector.reduce((prev, curr) => (prev.score + curr.score)/moviesFromDirector.lenght)
-const averageScore = Number(moviesScore.toFixed(2))
-console.log("EXERCISE 3 ->", averageScore)
-return averageScore
+  const moviesFromDirector = getMoviesFromDirector(array, director);
+  console.log(moviesFromDirector);
+  const moviesScore = moviesFromDirector.reduce(
+    (prev, curr) => (prev.score + curr.score) / moviesFromDirector.lenght
+  );
+  const averageScore = Number(moviesScore.toFixed(2));
+  console.log('EXERCISE 3 ->', averageScore);
+  return averageScore;
 }
 
-// Exercise 4:  Alphabetic order by title 
+// Exercise 4:  Alphabetic order by title
 function orderAlphabetically(array) {
- const moviesTitles = array.map(({title}) => title)
- const arrayOrdered = moviesTitles.sort((a , b) => a.localeCompare(b))
- const firstTwenty = arrayOrdered.slice(0, 20)
-
- return firstTwenty
-  
+  const moviesTitles = array.map(({ title }) => title);
+  const arrayOrdered = moviesTitles.sort((a, b) => a.localeCompare(b));
+  const firstTwenty = arrayOrdered.slice(0, 20);
+  return firstTwenty;
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
+function orderByYear(array) {
+  //sin utilizar el desestructuring
+  const moviesYears = array.map((item) => item.year);
 
+  const moviesByTitle = array.map((item) => item.title);
+  // const orderedArray = moviesYears.sort((a, b) => a.year - b.year)
+
+  const orderedArray = moviesYears.sort((a, b) => {
+    if (a.year === b.year) {
+      return moviesByTitle.sort((a, b) => a.localeCompare(b));
+    }
+    if (a.year !== b.year) {
+      return moviesYears.sort((a, b) => a.localeCompare(b));
+    }
+  });
+
+  return orderedArray;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
-}
+function moviesAverageByCategory() {}
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
-
-}
+function hoursToMinutes() {}
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-  
-}
-
-
+function bestFilmOfYear() {}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
@@ -69,7 +75,6 @@ if (typeof module !== 'undefined') {
     orderByYear,
     moviesAverageByCategory,
     hoursToMinutes,
-    bestFilmOfYear,
+    bestFilmOfYear
   };
 }
-
