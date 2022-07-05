@@ -32,31 +32,34 @@ function orderAlphabetically(array) {
   const moviesTitles = array.map(({ title }) => title);
   const arrayOrdered = moviesTitles.sort((a, b) => a.localeCompare(b));
   const firstTwenty = arrayOrdered.slice(0, 20);
+  console.log('EXERCISE 4 ->', firstTwenty);
   return firstTwenty;
 }
 
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
   //sin utilizar el desestructuring
-  const moviesYears = array.map((item) => item.year);
-
-  const moviesByTitle = array.map((item) => item.title);
+  //const moviesYears = array.map(item => item.year);
+  //const moviesByTitle = array.map(item => item.title);
   // const orderedArray = moviesYears.sort((a, b) => a.year - b.year)
 
-  const orderedArray = moviesYears.sort((a, b) => {
-    if (a.year === b.year) {
-      return moviesByTitle.sort((a, b) => a.localeCompare(b));
-    }
-    if (a.year !== b.year) {
-      return moviesYears.sort((a, b) => a.localeCompare(b));
-    }
-  });
+  const orderedArray = array
+    .map((item) => item)
+    .sort((a, b) => {
+      if (a.title > b.title) return 1;
+      if (a.title < b.title) return -1;
+      if (a.title === b.title) return 0;
+    });
+  orderedArray.sort((a, b) => a.year - b.year);
 
+  console.log('EXERCISE 5 ->', orderedArray);
   return orderedArray;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {}
+function moviesAverageByCategory(array) {
+  
+}
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes() {}
