@@ -17,14 +17,18 @@ function getMoviesFromDirector(array, director) {
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
-  const moviesFromDirector = getMoviesFromDirector(array, director);
-  console.log(moviesFromDirector);
-  const moviesScore = moviesFromDirector.reduce(
-    (prev, curr) => (prev.score + curr.score) / moviesFromDirector.lenght
+  const moviesFromDirector = array.map((item) => item.director === director);
+  const scoreFromTheMovies = array.filter(item => item.score !== '')
+  const moviesScore = scoreFromTheMovies.reduce(
+    (prev, curr) => prev + curr.score
   );
-  const averageScore = Number(moviesScore.toFixed(2));
+
+  // EN MOVIESSCORE TB HAY UN FALLO Y X ESO DA NaN
+  console.log('jose', moviesScore)
+  const averageScore = moviesScore / moviesFromDirector.length
+  //const rounded = Math.round((averageScore + Number.EPSILON)*100)/100
   console.log('EXERCISE 3 ->', averageScore);
-  return averageScore;
+  return averageScore
 }
 
 // Exercise 4:  Alphabetic order by title
@@ -38,11 +42,6 @@ function orderAlphabetically(array) {
 
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
-  //sin utilizar el desestructuring
-  //const moviesYears = array.map(item => item.year);
-  //const moviesByTitle = array.map(item => item.title);
-  // const orderedArray = moviesYears.sort((a, b) => a.year - b.year)
-
   const orderedArray = array
     .map((item) => item)
     .sort((a, b) => {
@@ -57,8 +56,16 @@ function orderByYear(array) {
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory(array) {
-  
+function moviesAverageByCategory(array, genre) {
+// esta línea es para ignorar las pelis sin score  
+const moviesScores = array.filter(item => item.score !== '')
+const moviesCategory = moviesScores.filter(item => item.genre.includes(genre))
+const moviesCategoryAndScore = moviesCategory.map(item => item.score)
+const sumValues = moviesCategoryAndScore.reduce((a, b) => a + b, 0)
+const average = sumValues / moviesCategoryAndScore.length
+const rounded = Math.round((average + Number.EPSILON) * 100) / 100
+console.log(average)
+return rounded
 }
 
 // Exercise 7: Modify the duration of movies to minutes
