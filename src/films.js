@@ -17,16 +17,14 @@ function getMoviesFromDirector(array, director) {
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
-  const moviesFromDirector = array.map((item) => item.director === director);
-  const scoreFromTheMovies = array.filter(item => item.score !== '')
-  const moviesScore = scoreFromTheMovies.reduce(
-    (prev, curr) => prev + curr.score
+  const moviesFromDirector = array.filter(item => item.director.includes(director));
+  const scoreFromTheMovies = moviesFromDirector.map(item => item.score)
+  const sumScores = scoreFromTheMovies.reduce(
+    (prev, curr) => prev + curr, 0
   );
-
-  // EN MOVIESSCORE TB HAY UN FALLO Y X ESO DA NaN
-  console.log('jose', moviesScore)
-  const averageScore = moviesScore / moviesFromDirector.length
-  //const rounded = Math.round((averageScore + Number.EPSILON)*100)/100
+  // console.log('jose', sumScores)
+  // console.log('pepe', scoreFromTheMovies)
+  const averageScore = sumScores / moviesFromDirector.length
   console.log('EXERCISE 3 ->', averageScore);
   return averageScore
 }
