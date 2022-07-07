@@ -55,23 +55,31 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(array, genre) {
-// esta línea es para ignorar las pelis sin score  
+// ignorar las pelis sin score  
 const moviesScores = array.filter(item => item.score !== '')
 const moviesCategory = moviesScores.filter(item => item.genre.includes(genre))
 const moviesCategoryAndScore = moviesCategory.map(item => item.score)
 const sumValues = moviesCategoryAndScore.reduce((a, b) => a + b, 0)
 const average = sumValues / moviesCategoryAndScore.length
-const rounded = Math.round((average + Number.EPSILON) * 100) / 100
-console.log(average)
+const rounded = Math.round(average * 100) / 100
+console.log('EXERCISE 6 ->', average)
 return rounded
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {}
+function hoursToMinutes(array) {
+}
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {}
-
+function bestFilmOfYear(array) {
+  const moviesYear = array.filter(item => item.year)
+  const moviesScores = moviesYear.sort((a, b) => b.score - a.score)
+  const bestOfTheYear = moviesScores.slice(0, 1)
+  console.log('lola', moviesScores)
+  console.log('EXERCISE 8 ->', bestOfTheYear)
+ 
+  return bestOfTheYear
+}
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
 if (typeof module !== 'undefined') {
