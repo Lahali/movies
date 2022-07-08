@@ -47,7 +47,7 @@ function orderByYear(array) {
       if (a.title < b.title) return -1;
       if (a.title === b.title) return 0;
     });
-// el sort se usa con if porque son strings y no números, con números se puede escribir en corto
+  // el sort se usa con if porque son strings y no números, con números se puede escribir en corto
   orderedArray.sort((a, b) => a.year - b.year);
 
   console.log('EXERCISE 5 ->', orderedArray);
@@ -71,19 +71,25 @@ function moviesAverageByCategory(array, genre) {
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-const moviesDuration = array.map(item => item.duration)
-const hours = moviesDuration.splice(0, 1)
-const minutesMovies = moviesDuration.splice(3, 5)
-const hoursToMinutes = parseInt(hours)
-let minutes = 0
-if (hoursToMinutes >= 1) {
- minutes += hoursToMinutes * 60 + minutesMovies
-} 
-  
-  console.log('maruja', minutes)
-  console.log('pepe', hours)
-  console.log('lola', hoursToMinutes)
-  return moviesDuration
+  let hoursToMinutes = 0, minutes = 0, durationMovies;
+
+  const moviesDuration = array.map((item) => {
+    durationMovies = item.duration.split(' ');
+    hoursToMinutes = parseInt(durationMovies[0]) * 60;
+    minutes = parseInt(durationMovies[1]);
+// sin este if, da error para película de 2 horas de duración.
+    if(durationMovies.length === 1) {
+      minutes = 0
+    }
+    const result = hoursToMinutes + minutes;
+// hay que hacer un return para todos los items!! No vale con un return sencillo    
+    return { 
+      ...item,
+      duration: result
+    } 
+  });
+console.log('ESERCISE 7', moviesDuration)
+  return moviesDuration;
 }
 
 // Exercise 8: Get the best film of a year
@@ -91,7 +97,6 @@ function bestFilmOfYear(array) {
   const moviesYear = array.filter((item) => item.year);
   const moviesScores = moviesYear.sort((a, b) => b.score - a.score);
   const bestOfTheYear = moviesScores.slice(0, 1);
-  //console.log('lola', moviesScores);
   console.log('EXERCISE 8 ->', bestOfTheYear);
 
   return bestOfTheYear;
